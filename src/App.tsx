@@ -4,6 +4,7 @@ import './App.css';
 import IncomeForm from './components/IncomeForm';
 import ExpenceForm from './components/ExpenceForm';
 import TargetForSaving from './components/TargetForSaving';
+import TransferToSaving from './components/TransferToSaving';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <IncomeForm />
       <ExpenceForm />
       <TargetForSaving />
+      <TransferToSaving />
     </div>
   );
 }

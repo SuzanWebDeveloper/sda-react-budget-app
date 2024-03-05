@@ -1,6 +1,7 @@
 import React from 'react';
 
 const TargetForSaving = () => {
+
   return (
     <div className="targetSaving-container">
       <form action="">
@@ -9,7 +10,7 @@ const TargetForSaving = () => {
           <input type="text" name="ts-source" id="ts-source" required />
           <button>Reset</button>
         </div>
-        <p>Current saving:</p>
+        <p>Current saving:{}</p>
         <p>Target:</p>
         <p>
           Progress:
