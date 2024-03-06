@@ -31,6 +31,7 @@ function App() {
         OnGetSavingAmount={getSavingAmount}
         totalIncomeAmount={totalIncome}
         totalExpenceAmount={totalExpence}
+        savingAmount={SavingAmount}
       />
     </div>
   );

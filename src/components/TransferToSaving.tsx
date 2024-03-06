@@ -5,6 +5,7 @@ type TransfertoSavingProps = {
   OnGetSavingAmount: (amount: number) => void;
   totalIncomeAmount: number;
   totalExpenceAmount: number;
+  savingAmount: number;
 };
 
 const TransferToSaving = (props: TransfertoSavingProps) => {
@@ -24,7 +25,10 @@ const TransferToSaving = (props: TransfertoSavingProps) => {
   return (
     <div className="trasnsferToSaving-container">
       <p>
-        Current Balance: {props.totalIncomeAmount - props.totalExpenceAmount}
+        Current Balance:
+        {props.totalIncomeAmount -
+          props.totalExpenceAmount -
+          props.savingAmount}
       </p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="source">Transfer to saving account</label>
