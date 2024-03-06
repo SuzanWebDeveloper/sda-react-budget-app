@@ -7,11 +7,6 @@ import TargetForSaving from './components/TargetForSaving';
 import TransferToSaving from './components/TransferToSaving';
 
 function App() {
-  const [message, setMessage] = useState('');
-  const getMessage = (message: string) => {
-    setMessage(message);
-  };
-
   const [SavingAmount, setSavingAmount] = useState(0);
   const getSavingAmount = (amount: number) => {
     setSavingAmount(amount);
