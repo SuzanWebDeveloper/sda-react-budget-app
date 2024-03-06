@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 type TransfertoSavingProps = {
   OnGetSavingAmount: (amount: number) => void;
+  totalIncomeAmount: number;
+  totalExpenceAmount: number;
 };
 
 const TransferToSaving = (props: TransfertoSavingProps) => {
@@ -15,12 +17,15 @@ const TransferToSaving = (props: TransfertoSavingProps) => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     props.OnGetSavingAmount(amount);
+
     setAmount(0);
   };
 
   return (
     <div className="trasnsferToSaving-container">
-      <p>Current Balance: 0</p>
+      <p>
+        Current Balance: {props.totalIncomeAmount - props.totalExpenceAmount}
+      </p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="source">Transfer to saving account</label>
         <input

@@ -19,8 +19,8 @@ const TargetForSaving = (props: { savingAmount: number }) => {
           <label htmlFor="source">Set target</label>
           <input
             type="number"
-            name="ts-source"
-            id="ts-source"
+            name="source"
+            id="source"
             onChange={handleTargetChange}
             value={target}
             required

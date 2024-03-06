@@ -7,11 +7,21 @@ type expenceType = {
   amount: number;
   date: string;
 };
-const ExpenceForm = () => {
+
+type TotalExpenceProps = { onGetTotalExpence :(amount:number)=>void;}
+
+const ExpenceForm = (props: TotalExpenceProps) => {
   const [source, setSource] = useState('');
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState('');
   const [expences, setExpences] = useState<expenceType[]>([]);
+
+  const totalExpence = expences.reduce(
+    (total, currentExpence) => total + currentExpence.amount,
+    0
+  );
+
+props.onGetTotalExpence(totalExpence);
 
   const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSource(event.target.value);

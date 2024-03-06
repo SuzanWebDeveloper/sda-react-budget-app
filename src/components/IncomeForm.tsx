@@ -8,11 +8,21 @@ type IncomeType = {
   date: string;
 };
 
-const IncomeForm = () => {
+type TotalIncomeProps = {
+  onGetTotalIncome: (amount: number) => void;
+};
+
+const IncomeForm = (props: TotalIncomeProps) => {
   const [source, setSource] = useState('');
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState('');
   const [incomes, setIncomes] = useState<IncomeType[]>([]);
+
+  const totalIncome = incomes.reduce(
+    (total, currentIncome) => total + currentIncome.amount,
+    0
+  );
+  props.onGetTotalIncome(totalIncome);
 
   const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSource(event.target.value);

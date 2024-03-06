@@ -12,12 +12,26 @@ function App() {
     setSavingAmount(amount);
   };
 
+  const [totalIncome, setTotalIncome] = useState(0);
+  const getTotalIncome = (amount: number) => {
+    setTotalIncome(amount);
+  };
+
+  const [totalExpence, setTotalExpence] = useState(0);
+  const getTotalExpence = (amount: number) => {
+    setTotalExpence(amount);
+  };
+
   return (
     <div className="component-container">
-      <IncomeForm />
-      <ExpenceForm />
+      <IncomeForm onGetTotalIncome={getTotalIncome} />
+      <ExpenceForm onGetTotalExpence={getTotalExpence} />
       <TargetForSaving savingAmount={SavingAmount} />
-      <TransferToSaving OnGetSavingAmount={getSavingAmount} />
+      <TransferToSaving
+        OnGetSavingAmount={getSavingAmount}
+        totalIncomeAmount={totalIncome}
+        totalExpenceAmount={totalExpence}
+      />
     </div>
   );
 }
