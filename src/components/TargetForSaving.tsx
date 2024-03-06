@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 
-const TargetForSaving = () => {
+const TargetForSaving = (props: { savingAmount: number }) => {
+  const [target, setTarget] = useState(0);
+
+  const handleTargetChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTarget(Number(event.target.value));
+  };
+
+  const handleReset = (event: FormEvent) => {
+    event.preventDefault();
+    setTarget(0);
+  };
 
   return (
     <div className="targetSaving-container">
       <form action="">
         <div>
           <label htmlFor="source">Set target</label>
-          <input type="text" name="ts-source" id="ts-source" required />
-          <button>Reset</button>
+          <input
+            type="number"
+            name="ts-source"
+            id="ts-source"
+            onChange={handleTargetChange}
+            value={target}
+            required
+          />
+          <button onClick={handleReset}>Reset</button>
         </div>
-        <p>Current saving:{}</p>
-        <p>Target:</p>
-        <p>
-          Progress:
-          <progress></progress>
-        </p>
       </form>
+      <p>Current saving:{props.savingAmount}</p>
+      <p>Target:{target}</p>
+      <p>
+        Progress:
+        <progress></progress>
+      </p>
     </div>
   );
 };

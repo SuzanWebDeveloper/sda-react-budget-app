@@ -60,7 +60,7 @@ const IncomeForm = () => {
         <div>
           <label htmlFor="amount">Amount of income</label>
           <input
-            type="text"
+            type="number"
             name="amount"
             id="amount"
             value={amount}
@@ -69,7 +69,7 @@ const IncomeForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="date">Date of incom</label>
+          <label htmlFor="date">Date of income</label>
           <input
             type="date"
             name="date"

@@ -57,7 +57,7 @@ const ExpenceForm = () => {
         <div>
           <label htmlFor="">Amount of expence</label>
           <input
-            type="text"
+            type="number"
             name="amount"
             id="amount"
             value={amount}
