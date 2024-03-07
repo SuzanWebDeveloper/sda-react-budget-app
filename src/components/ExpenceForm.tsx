@@ -8,7 +8,7 @@ type expenceType = {
   date: string;
 };
 
-type TotalExpenceProps = { onGetTotalExpence :(amount:number)=>void;}
+type TotalExpenceProps = { onGetTotalExpence: (amount: number) => void };
 
 const ExpenceForm = (props: TotalExpenceProps) => {
   const [source, setSource] = useState('');
@@ -21,7 +21,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
     0
   );
 
-props.onGetTotalExpence(totalExpence);
+  props.onGetTotalExpence(totalExpence);
 
   const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSource(event.target.value);
@@ -47,6 +47,11 @@ props.onGetTotalExpence(totalExpence);
     setSource('');
     setAmount(0);
     setDate('');
+  };
+
+  const handleExpenceDelete = (id: string) => {
+    const filteredIncomes = expences.filter((expence) => expence.id !== id);
+    setExpences(filteredIncomes);
   };
 
   return (
@@ -93,6 +98,9 @@ props.onGetTotalExpence(totalExpence);
           return (
             <li key={expence.id}>
               {expence.source}: {expence.amount}EUR on {expence.date}
+              <button onClick={() => handleExpenceDelete(expence.id)}>
+                Delete
+              </button>
             </li>
           );
         })}

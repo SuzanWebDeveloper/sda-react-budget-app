@@ -46,10 +46,15 @@ const IncomeForm = (props: TotalIncomeProps) => {
       return [...prevIncomes, income];
     });
 
-    //reset thhee state
+    //reset the state
     setSource('');
     setAmount(0);
     setDate('');
+  };
+
+  const handleIncomeDelete = (id: string) => {
+    const filteredIncomes = incomes.filter((income) => income.id !== id);
+    setIncomes(filteredIncomes);
   };
 
   return (
@@ -97,6 +102,9 @@ const IncomeForm = (props: TotalIncomeProps) => {
           return (
             <li key={income.id}>
               {income.source}: {income.amount}EUR on {income.date}
+              <button onClick={() => handleIncomeDelete(income.id)}>
+                Delete
+              </button>
             </li>
           );
         })}
