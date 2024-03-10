@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const TargetForSaving = (props: { savingAmount: number }) => {
   const [target, setTarget] = useState(0);
@@ -16,17 +17,18 @@ const TargetForSaving = (props: { savingAmount: number }) => {
       setSavings((prev) => {
         return [...prev, props.savingAmount];
       });
-    } else if (!target) console.log('no target');
-    else console.log('amout greater than target');
+    } else if (!target) toast.error('please enter target');
+    else toast.error('amout is greater than target');
   }, [props.savingAmount]);
 
   let savingPercentage = 0;
   if (target !== 0 && totalSavings <= target)
-    savingPercentage = (totalSavings / target) * 100;
+    savingPercentage = Math.round((totalSavings / target) * 100);
   //-------------
 
   const handleTargetChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTarget(Number(event.target.value));
+    const amount = Number(event.target.value);
+    amount > 0 ? setTarget(amount) : toast.error("amout can't be negative");
   };
 
   const handleReset = (event: FormEvent) => {

@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 type IncomeType = {
@@ -28,28 +29,30 @@ const IncomeForm = (props: TotalIncomeProps) => {
     setSource(event.target.value);
   };
   const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value));
+    const amount = Number(event.target.value);
+    amount > 0 ? setAmount(amount) : toast.error("amout can't be negative")
   };
   const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDate(event.target.value);
   };
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const income = {
-      id: uuidv4(),
-      source: source,
-      amount: amount,
-      date: date,
-    };
-
-    setIncomes((prevIncomes) => {
-      return [...prevIncomes, income];
-    });
-
-    //reset the state
-    setSource('');
-    setAmount(0);
-    setDate('');
+    if (amount == 0) toast.error('please enter amount');
+    else {
+      const income = {
+        id: uuidv4(),
+        source: source,
+        amount: amount,
+        date: date,
+      };
+      setIncomes((prevIncomes) => {
+        return [...prevIncomes, income];
+      });
+      //reset the state
+      setSource('');
+      setAmount(0);
+      setDate('');
+    }
   };
 
   const handleIncomeDelete = (id: string) => {

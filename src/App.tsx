@@ -1,3 +1,6 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -24,6 +27,7 @@ function App() {
 
   return (
     <div className="component-container">
+      <ToastContainer />
       <IncomeForm onGetTotalIncome={getTotalIncome} />
       <ExpenceForm onGetTotalExpence={getTotalExpence} />
       <TargetForSaving savingAmount={SavingAmount} />

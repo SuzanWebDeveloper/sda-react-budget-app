@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent } from 'react';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 type TransfertoSavingProps = {
   OnGetSavingAmount: (amount: number) => void;
@@ -12,7 +13,8 @@ const TransferToSaving = (props: TransfertoSavingProps) => {
   const [amount, setAmount] = useState(0);
 
   const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value));
+    const amount = Number(event.target.value);
+    amount > 0 ? setAmount(amount) : toast.error("amout can't be negative");
   };
 
   const balance =
@@ -20,9 +22,11 @@ const TransferToSaving = (props: TransfertoSavingProps) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    balance >= amount
+    amount == 0
+      ? toast.error('please enter amount')
+      : amount <= balance
       ? props.OnGetSavingAmount(amount)
-      : alert('amount greater than balance');
+      : toast.error('amount is greater than balance');
 
     setAmount(0);
   };
