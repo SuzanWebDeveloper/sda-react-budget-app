@@ -15,21 +15,21 @@ const TransferToSaving = (props: TransfertoSavingProps) => {
     setAmount(Number(event.target.value));
   };
 
+  const balance =
+    props.totalIncomeAmount - props.totalExpenceAmount - props.savingAmount;
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    props.OnGetSavingAmount(amount);
+    balance >= amount
+      ? props.OnGetSavingAmount(amount)
+      : alert('amount greater than balance');
 
     setAmount(0);
   };
 
   return (
-    <div className="trasnsferToSaving-container">
-      <p>
-        Current Balance:
-        {props.totalIncomeAmount -
-          props.totalExpenceAmount -
-          props.savingAmount}
-      </p>
+    <div className="trasnsfer-container">
+      <p>Current Balance: {balance}</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="source">Transfer to saving account</label>
         <input

@@ -70,7 +70,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
           />
         </div>
         <div>
-          <label htmlFor="">Amount of expence</label>
+          <label htmlFor="amount">Amount of expence</label>
           <input
             type="number"
             name="amount"
@@ -81,7 +81,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
           />
         </div>
         <div>
-          <label htmlFor="">Date of expence</label>
+          <label htmlFor="date">Date of expence</label>
           <input
             type="date"
             name="date"
@@ -94,6 +94,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
         <button>Add expence</button>
       </form>
       <ul>
+        {/* display expences */}
         {expences.map((expence: expenceType) => {
           return (
             <li key={expence.id}>
