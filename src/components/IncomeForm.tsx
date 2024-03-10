@@ -30,7 +30,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
   };
   const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
     const amount = Number(event.target.value);
-    amount > 0 ? setAmount(amount) : toast.error("amout can't be negative")
+    amount > 0 ? setAmount(amount) : toast.error("amount can't be negative")
   };
   const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDate(event.target.value);

@@ -18,7 +18,7 @@ const TargetForSaving = (props: { savingAmount: number }) => {
         return [...prev, props.savingAmount];
       });
     } else if (!target) toast.error('please enter target');
-    else toast.error('amout is greater than target');
+    else toast.error('amount is greater than target');
   }, [props.savingAmount]);
 
   let savingPercentage = 0;
@@ -28,7 +28,7 @@ const TargetForSaving = (props: { savingAmount: number }) => {
 
   const handleTargetChange = (event: ChangeEvent<HTMLInputElement>) => {
     const amount = Number(event.target.value);
-    amount > 0 ? setTarget(amount) : toast.error("amout can't be negative");
+    amount > 0 ? setTarget(amount) : toast.error("amount can't be negative");
   };
 
   const handleReset = (event: FormEvent) => {
