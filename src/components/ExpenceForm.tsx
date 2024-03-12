@@ -78,7 +78,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
             id="expence-source"
             value={expence.source}
             onChange={handleChange}
-            //required
+            required
           />
         </div>
         <div>

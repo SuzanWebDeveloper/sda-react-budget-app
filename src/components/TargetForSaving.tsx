@@ -10,7 +10,6 @@ const TargetForSaving = (props: { savingAmount: number }) => {
     (total, currentSaving) => total + currentSaving,
     0
   );
-
   //---------- savings percentage
   useEffect(() => {
     if (totalSavings <= target && totalSavings + props.savingAmount <= target) {
