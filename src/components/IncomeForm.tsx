@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 type IncomeType = {
-  id: string;
+  id?: string;
   source: string;
   amount: number;
   date: string;
@@ -14,44 +14,54 @@ type TotalIncomeProps = {
 };
 
 const IncomeForm = (props: TotalIncomeProps) => {
-  const [source, setSource] = useState('');
-  const [amount, setAmount] = useState(0);
-  const [date, setDate] = useState('');
+  const [income, setIncome] = useState<IncomeType>({
+    source: '',
+    amount: 0,
+    date: '',
+  });
+
   const [incomes, setIncomes] = useState<IncomeType[]>([]);
 
   const totalIncome = incomes.reduce(
     (total, currentIncome) => total + currentIncome.amount,
     0
   );
+
   props.onGetTotalIncome(totalIncome);
 
-  const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSource(event.target.value);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === 'amount') {
+      const amount = Number(event.target.value);
+      amount > 0
+        ? setIncome((prevIncome) => {
+            return { ...prevIncome, [event.target.name]: amount };
+          })
+        : amount < 0 && toast.error("amount can't be negative");
+    } else
+      setIncome((prevIncome) => {
+        return { ...prevIncome, [event.target.name]: event.target.value };
+      });
   };
-  const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const amount = Number(event.target.value);
-    amount > 0 ? setAmount(amount) : toast.error("amount can't be negative")
-  };
-  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value);
-  };
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (amount == 0) toast.error('please enter amount');
+    if (income.amount == 0) toast.error('please enter amount');
     else {
-      const income = {
+      const newIncome = {
         id: uuidv4(),
-        source: source,
-        amount: amount,
-        date: date,
+        source: income.source,
+        amount: income.amount,
+        date: income.date,
       };
       setIncomes((prevIncomes) => {
-        return [...prevIncomes, income];
+        return [...prevIncomes, newIncome];
       });
       //reset the state
-      setSource('');
-      setAmount(0);
-      setDate('');
+      setIncome({
+        source: '',
+        amount: 0,
+        date: '',
+      });
     }
   };
 
@@ -69,9 +79,9 @@ const IncomeForm = (props: TotalIncomeProps) => {
             type="text"
             placeholder="Salary"
             name="source"
-            id="source"
-            value={source}
-            onChange={handleSourceChange}
+            id="income-source"
+            value={income.source}
+            onChange={handleChange}
             required
           />
         </div>
@@ -80,9 +90,9 @@ const IncomeForm = (props: TotalIncomeProps) => {
           <input
             type="number"
             name="amount"
-            id="amount"
-            value={amount}
-            onChange={handleAmountChange}
+            id="income-amount"
+            value={income.amount == 0 ? '' : income.amount}
+            onChange={handleChange}
             required
           />
         </div>
@@ -91,27 +101,30 @@ const IncomeForm = (props: TotalIncomeProps) => {
           <input
             type="date"
             name="date"
-            id="date"
-            value={date}
-            onChange={handleDateChange}
+            id="income-date"
+            value={income.date}
+            onChange={handleChange}
             required
           />
         </div>
         <button>Add income</button>
       </form>
+
       {/* list the data from array */}
-      <ul>
-        {incomes.map((income: IncomeType) => {
-          return (
-            <li key={income.id}>
-              {income.source}: {income.amount}EUR on {income.date}
-              <button onClick={() => handleIncomeDelete(income.id)}>
-                Delete
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      {incomes.length > 0 && (
+        <ul>
+          {incomes.map((income: IncomeType) => {
+            return (
+              <li key={income.id}>
+                {income.source}: {income.amount}EUR on {income.date}
+                <button onClick={() => handleIncomeDelete(income.id!)}>
+                  Delete
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };

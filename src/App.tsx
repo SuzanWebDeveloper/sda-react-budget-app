@@ -30,7 +30,10 @@ function App() {
       <ToastContainer />
       <IncomeForm onGetTotalIncome={getTotalIncome} />
       <ExpenceForm onGetTotalExpence={getTotalExpence} />
-      <TargetForSaving savingAmount={SavingAmount} />
+      <TargetForSaving
+        savingAmount={SavingAmount}
+  
+      />
       <TransferToSaving
         OnGetSavingAmount={getSavingAmount}
         totalIncomeAmount={totalIncome}

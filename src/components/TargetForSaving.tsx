@@ -18,7 +18,7 @@ const TargetForSaving = (props: { savingAmount: number }) => {
         return [...prev, props.savingAmount];
       });
     } else if (!target) toast.error('please enter target');
-    else toast.error('amount is greater than target');
+    else toast.error('amount exceeds target');
   }, [props.savingAmount]);
 
   let savingPercentage = 0;
@@ -45,7 +45,7 @@ const TargetForSaving = (props: { savingAmount: number }) => {
           <input
             type="number"
             name="source"
-            id="source"
+            id="target-source"
             onChange={handleTargetChange}
             value={target}
             required

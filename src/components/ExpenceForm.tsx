@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useState, FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
-type expenceType = {
-  id: string;
+type ExpenceType = {
+  id?: string;
   source: string;
   amount: number;
   date: string;
@@ -11,10 +12,12 @@ type expenceType = {
 type TotalExpenceProps = { onGetTotalExpence: (amount: number) => void };
 
 const ExpenceForm = (props: TotalExpenceProps) => {
-  const [source, setSource] = useState('');
-  const [amount, setAmount] = useState(0);
-  const [date, setDate] = useState('');
-  const [expences, setExpences] = useState<expenceType[]>([]);
+  const [expence, setExpence] = useState<ExpenceType>({
+    source: '',
+    amount: 0,
+    date: '',
+  });
+  const [expences, setExpences] = useState<ExpenceType[]>([]);
 
   const totalExpence = expences.reduce(
     (total, currentExpence) => total + currentExpence.amount,
@@ -23,30 +26,39 @@ const ExpenceForm = (props: TotalExpenceProps) => {
 
   props.onGetTotalExpence(totalExpence);
 
-  const handleSourceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSource(event.target.value);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === 'amount') {
+      const amount = Number(event.target.value);
+      amount > 0
+        ? setExpence((prevIncome) => {
+            return { ...prevIncome, [event.target.name]: amount };
+          })
+        : toast.error("amount can't be negative");
+    } else
+      setExpence((prevIncome) => {
+        return { ...prevIncome, [event.target.name]: event.target.value };
+      });
   };
-  const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(event.target.value));
-  };
-  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value);
-  };
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const expence = {
-      id: uuidv4(),
-      source: source,
-      amount: amount,
-      date: date,
-    };
-    setExpences((prevExpences) => {
-      return [...prevExpences, expence];
-    });
-
-    setSource('');
-    setAmount(0);
-    setDate('');
+    if (expence.amount == 0) toast.error('please enter amount');
+    else {
+      const newExpence = {
+        id: uuidv4(),
+        source: expence.source,
+        amount: expence.amount,
+        date: expence.date,
+      };
+      setExpences((prevExpences) => {
+        return [...prevExpences, expence];
+      });
+      setExpence({
+        source: '',
+        amount: 0,
+        date: '',
+      });
+    }
   };
 
   const handleExpenceDelete = (id: string) => {
@@ -63,10 +75,10 @@ const ExpenceForm = (props: TotalExpenceProps) => {
             type="text"
             placeholder="Electricity bill"
             name="source"
-            id="source"
-            value={source}
-            onChange={handleSourceChange}
-            required
+            id="expence-source"
+            value={expence.source}
+            onChange={handleChange}
+            //required
           />
         </div>
         <div>
@@ -74,9 +86,9 @@ const ExpenceForm = (props: TotalExpenceProps) => {
           <input
             type="number"
             name="amount"
-            id="amount"
-            value={amount}
-            onChange={handleAmountChange}
+            id="expence-amount"
+            value={expence.amount}
+            onChange={handleChange}
             required
           />
         </div>
@@ -85,9 +97,9 @@ const ExpenceForm = (props: TotalExpenceProps) => {
           <input
             type="date"
             name="date"
-            id="date"
-            value={date}
-            onChange={handleDateChange}
+            id="expence-date"
+            value={expence.date}
+            onChange={handleChange}
             required
           />
         </div>
@@ -95,11 +107,11 @@ const ExpenceForm = (props: TotalExpenceProps) => {
       </form>
       <ul>
         {/* display expences */}
-        {expences.map((expence: expenceType) => {
+        {expences.map((expence: ExpenceType) => {
           return (
             <li key={expence.id}>
               {expence.source}: {expence.amount}EUR on {expence.date}
-              <button onClick={() => handleExpenceDelete(expence.id)}>
+              <button onClick={() => handleExpenceDelete(expence.id!)}>
                 Delete
               </button>
             </li>
