@@ -1,4 +1,9 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useState,
+} from 'react';
 import { toast } from 'react-toastify';
 
 const TargetForSaving = (props: { savingAmount: number }) => {

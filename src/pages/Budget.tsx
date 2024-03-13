@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import IncomeForm from '../components/IncomeForm';
 import ExpenceForm from '../components/ExpenceForm';
@@ -9,19 +9,23 @@ import TransferToSaving from '../components/TransferToSaving';
 
 function Budget() {
   const [SavingAmount, setSavingAmount] = useState(0);
-  const getSavingAmount = (amount: number) => {
-    setSavingAmount(amount);
-  };
-
   const [totalIncome, setTotalIncome] = useState(0);
-  const getTotalIncome = (amount: number) => {
-    setTotalIncome(amount);
-  };
-
   const [totalExpence, setTotalExpence] = useState(0);
-  const getTotalExpence = (amount: number) => {
+
+  const getSavingAmount = useCallback((amount: number) => {
+    setSavingAmount(amount);
+  }, []);
+
+  const getTotalIncome = useCallback(
+    (amount: number) => {
+      setTotalIncome(amount);
+    },
+    [totalIncome]
+  );
+
+  const getTotalExpence = useCallback((amount: number) => {
     setTotalExpence(amount);
-  };
+  }, []);
 
   return (
     <div className="component-container">
