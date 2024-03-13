@@ -40,7 +40,7 @@ const TargetForSaving = (props: { savingAmount: number }) => {
     <div className="targetSaving-container">
       <form action="">
         <div>
-          <label htmlFor="source">Set target</label>
+          <label htmlFor="target-source">Set target</label>
           <input
             type="number"
             name="source"

@@ -74,7 +74,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
     <div className="incomeForm-container">
       <form action="" onSubmit={handleSubmit}>
         <div className="pair">
-          <label htmlFor="source">Income source</label>
+          <label htmlFor="income-source">Income source</label>
           <input
             type="text"
             placeholder="Salary"
@@ -86,7 +86,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
           />
         </div>
         <div>
-          <label htmlFor="amount">Amount of income</label>
+          <label htmlFor="income-amount">Amount of income</label>
           <input
             type="number"
             name="amount"
@@ -97,7 +97,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
           />
         </div>
         <div>
-          <label htmlFor="date">Date of income</label>
+          <label htmlFor="income-date">Date of income</label>
           <input
             type="date"
             name="date"

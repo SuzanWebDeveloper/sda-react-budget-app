@@ -70,7 +70,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
     <div className="expenceForm-container">
       <form action="" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="source">Expence source</label>
+          <label htmlFor="expence-source">Expence source</label>
           <input
             type="text"
             placeholder="Electricity bill"
@@ -82,7 +82,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
           />
         </div>
         <div>
-          <label htmlFor="amount">Amount of expence</label>
+          <label htmlFor="expence-amount">Amount of expence</label>
           <input
             type="number"
             name="amount"
@@ -93,7 +93,7 @@ const ExpenceForm = (props: TotalExpenceProps) => {
           />
         </div>
         <div>
-          <label htmlFor="date">Date of expence</label>
+          <label htmlFor="expence-date">Date of expence</label>
           <input
             type="date"
             name="date"
