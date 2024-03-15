@@ -75,7 +75,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
   return (
     <div className="income-form-container">
       <form onSubmit={handleSubmit}>
-        <div className="pair">
+        <div>
           <label htmlFor="income-source">Income source</label>
           <input
             type="text"

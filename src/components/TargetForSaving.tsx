@@ -30,7 +30,7 @@ const TargetForSaving = (props: TargetForSavingProps) => {
 
   return (
     <div className="target-saving-container">
-      <form action="">
+      <form>
         <div>
           <label htmlFor="target-source">Set target</label>
           <input
