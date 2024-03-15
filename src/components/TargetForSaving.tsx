@@ -1,48 +1,35 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useState,
-} from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
 
-const TargetForSaving = (props: { savingAmount: number }) => {
-  const [target, setTarget] = useState(0);
+type TargetForSavingProps = {
+  totalSaving: number;
+  setTotalSaving: (amount: number) => void;
+  target: number;
+  setTarget: (amount: number) => void;
+};
 
-  //------------ total savings
-  const [savings, setSavings] = useState<number[]>([]);
-  const totalSavings = savings.reduce(
-    (total, currentSaving) => total + currentSaving,
-    0
-  );
+const TargetForSaving = (props: TargetForSavingProps) => {
   //---------- savings percentage
-  useEffect(() => {
-    if (totalSavings <= target && totalSavings + props.savingAmount <= target) {
-      setSavings((prev) => {
-        return [...prev, props.savingAmount];
-      });
-    } else if (!target) toast.error('please enter target');
-    else toast.error('amount exceeds target');
-  }, [props.savingAmount]);
-
   let savingPercentage = 0;
-  if (target !== 0 && totalSavings <= target)
-    savingPercentage = Math.round((totalSavings / target) * 100);
-  //-------------
+  if (props.target !== 0 && props.totalSaving <= props.target)
+    savingPercentage = Math.round((props.totalSaving / props.target) * 100);
+  //------------
 
   const handleTargetChange = (event: ChangeEvent<HTMLInputElement>) => {
     const amount = Number(event.target.value);
-    amount > 0 ? setTarget(amount) : toast.error("amount can't be negative");
+    amount > 0
+      ? props.setTarget(amount)
+      : toast.error("Amount can't be negative");
   };
 
   const handleReset = (event: FormEvent) => {
     event.preventDefault();
-    setTarget(0);
-    setSavings([]);
+    props.setTarget(0);
+    props.setTotalSaving(0);
   };
 
   return (
-    <div className="targetSaving-container">
+    <div className="target-saving-container">
       <form action="">
         <div>
           <label htmlFor="target-source">Set target</label>
@@ -51,14 +38,14 @@ const TargetForSaving = (props: { savingAmount: number }) => {
             name="source"
             id="target-source"
             onChange={handleTargetChange}
-            value={target}
+            value={props.target}
             required
           />
           <button onClick={handleReset}>Reset</button>
         </div>
       </form>
-      <p>Current saving: {totalSavings}</p>
-      <p>Target: {target}</p>
+      <p>Current saving: {props.totalSaving}</p>
+      <p>Target: {props.target}</p>
       <p>
         Progress: {savingPercentage}%
         <progress value={savingPercentage} max={100} />

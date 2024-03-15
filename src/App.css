@@ -7,7 +7,7 @@
   gap: 1rem;
 }
 
-.incomeForm-container {
+.income-form-container {
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -17,7 +17,7 @@
   background-color: rgba(133, 173, 229, 0.549);
 }
 
-.expenceForm-container {
+.expense-form-container {
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -27,7 +27,7 @@
   background-color: rgb(229, 163, 133, 0.549);
 }
 
-.targetSaving-container {
+.target-saving-container {
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -37,3 +37,6 @@
   background-color: rgb(145, 207, 145, 0.549);
 }
 
+.error {
+  color: red;
+}

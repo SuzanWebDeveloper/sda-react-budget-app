@@ -1,49 +1,52 @@
-import React, { ChangeEvent, FormEvent } from 'react';
-import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 type TransfertoSavingProps = {
-  OnGetSavingAmount: (amount: number) => void;
   totalIncomeAmount: number;
-  totalExpenceAmount: number;
-  savingAmount: number;
+  totalExpenseAmount: number;
+  totalSaving: number;
+  setTotalSaving: (amount: number) => void;
+  target: number;
+};
+
+type Input = {
+  amount: number;
 };
 
 const TransferToSaving = (props: TransfertoSavingProps) => {
-  const [amount, setAmount] = useState(0);
-
-  const handleAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const amount = Number(event.target.value);
-    amount > 0 ? setAmount(amount) : toast.error("amount can't be negative");
-  };
-
   const balance =
-    props.totalIncomeAmount - props.totalExpenceAmount - props.savingAmount;
+    props.totalIncomeAmount - props.totalExpenseAmount - props.totalSaving;
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    amount == 0
-      ? toast.error('please enter amount')
-      : amount <= balance
-      ? props.OnGetSavingAmount(amount)
-      : toast.error('amount is greater than balance');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<Input>();
 
-    setAmount(0);
+  const onSubmit: SubmitHandler<Input> = (data) => {
+    let totalSaving = data.amount + props.totalSaving;
+    if (totalSaving > props.target) toast.error('Amount exceeds target');
+    else props.setTotalSaving(totalSaving);
+
+    reset();
   };
 
   return (
-    <div className="trasnsfer-container">
+    <div className="transfer-container">
       <p>Current Balance: {balance}</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="transfer-amount">Transfer to saving account</label>
         <input
           type="number"
-          name="amount"
           id="transfer-amount"
-          onChange={handleAmountChange}
-          value={amount}
-          required
-        ></input>
+          {...register('amount', {
+            valueAsNumber: true,
+            required: 'Please enter amount',
+            min: { value: 0, message: "Amount can't be negative" },
+          })}
+        />
+        {errors.amount && <p className="error"> {errors.amount.message}</p>}
         <button>Transfer</button>
       </form>
     </div>

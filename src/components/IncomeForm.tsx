@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -27,7 +27,9 @@ const IncomeForm = (props: TotalIncomeProps) => {
     0
   );
 
-  props.onGetTotalIncome(totalIncome);
+  useEffect(() => {
+    props.onGetTotalIncome(totalIncome);
+  }, [totalIncome, props]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.name === 'amount') {
@@ -36,7 +38,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
         ? setIncome((prevIncome) => {
             return { ...prevIncome, [event.target.name]: amount };
           })
-        : amount < 0 && toast.error("amount can't be negative");
+        : amount < 0 && toast.error("Amount can't be negative");
     } else
       setIncome((prevIncome) => {
         return { ...prevIncome, [event.target.name]: event.target.value };
@@ -45,7 +47,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (income.amount == 0) toast.error('please enter amount');
+    if (income.amount == 0) toast.error('Please enter amount');
     else {
       const newIncome = {
         id: uuidv4(),
@@ -71,8 +73,8 @@ const IncomeForm = (props: TotalIncomeProps) => {
   };
 
   return (
-    <div className="incomeForm-container">
-      <form action="" onSubmit={handleSubmit}>
+    <div className="income-form-container">
+      <form onSubmit={handleSubmit}>
         <div className="pair">
           <label htmlFor="income-source">Income source</label>
           <input
@@ -109,7 +111,6 @@ const IncomeForm = (props: TotalIncomeProps) => {
         </div>
         <button>Add income</button>
       </form>
-
       {/* list the data from array */}
       {incomes.length > 0 && (
         <ul>
