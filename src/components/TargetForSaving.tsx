@@ -11,7 +11,7 @@ type TargetForSavingProps = {
 const TargetForSaving = (props: TargetForSavingProps) => {
   //---------- savings percentage
   let savingPercentage = 0;
-  if (props.target !== 0 && props.totalSaving <= props.target)
+ if (props.target !== 0 && props.totalSaving <= props.target)
     savingPercentage = Math.round((props.totalSaving / props.target) * 100);
   //------------
 

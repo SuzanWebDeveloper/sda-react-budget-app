@@ -26,9 +26,19 @@ const TransferToSaving = (props: TransfertoSavingProps) => {
 
   const onSubmit: SubmitHandler<Input> = (data) => {
     let totalSaving = data.amount + props.totalSaving;
-    if (totalSaving > props.target) toast.error('Amount exceeds target');
-    else props.setTotalSaving(totalSaving);
-
+    if (!props.target) {
+      toast.error('Please enter target');
+      return;
+    }
+    if (data.amount > balance) {
+      toast.error('Amount is greater than balance');
+      return;
+    }
+    if (totalSaving > props.target) {
+      toast.error('Saving amount exceeds target');
+      return;
+    }
+    props.setTotalSaving(totalSaving);
     reset();
   };
 
