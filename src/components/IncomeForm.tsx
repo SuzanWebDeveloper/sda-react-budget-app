@@ -47,7 +47,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (income.amount == 0) toast.error('Please enter amount');
+    if (income.amount === 0) toast.error('Please enter amount');
     else {
       const newIncome = {
         id: uuidv4(),
@@ -93,7 +93,7 @@ const IncomeForm = (props: TotalIncomeProps) => {
             type="number"
             name="amount"
             id="income-amount"
-            value={income.amount == 0 ? '' : income.amount}
+            value={income.amount === 0 ? '' : income.amount}
             onChange={handleChange}
             required
           />

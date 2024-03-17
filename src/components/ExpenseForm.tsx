@@ -44,7 +44,7 @@ const ExpenseForm = (props: TotalExpenseProps) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (expense.amount == 0) toast.error('Please enter amount');
+    if (expense.amount === 0) toast.error('Please enter amount');
     else {
       const newExpense = {
         id: uuidv4(),
