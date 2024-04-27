@@ -1,10 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #fafafa;
+  color: rgb(27, 27, 27);
+}
+
+h1 {
+  color: rgb(47, 47, 47);
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  display: block;
+}
+
 .component-container {
   display: flex;
-  justify-content: center;
-  align-items: left;
+  justify-content: space-around;
+  align-items: start;
   text-align: left;
   padding: 0.5rem;
-  gap: 1rem;
+  /* gap: 1.5rem; */
 }
 
 .income-form-container {
@@ -13,8 +32,15 @@
   justify-content: left;
   align-items: left;
   text-align: left;
-  padding: 0.5rem;
-  background-color: rgba(133, 173, 229, 0.549);
+  padding: 1.5rem 2rem;
+  background-color: #cae6f8;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(149, 189, 245, 0.386);
+  border-radius: 15px;
+  /* margin-left: 10px;
+    margin-right: 10px; */
+  margin: 0 30px 20px 0;
 }
 
 .expense-form-container {
@@ -23,8 +49,13 @@
   justify-content: left;
   align-items: left;
   text-align: left;
-  padding: 0.5rem;
+  padding: 1.5rem 2rem;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: rgb(229, 163, 133, 0.549);
   background-color: rgb(229, 163, 133, 0.549);
+  margin: 0 30px 20px 0;
 }
 
 .target-saving-container {
@@ -33,10 +64,99 @@
   justify-content: left;
   align-items: left;
   text-align: left;
-  padding: 0.5rem;
+  padding: 1.5rem 2rem;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: rgb(145, 207, 145, 0.549);
   background-color: rgb(145, 207, 145, 0.549);
+  margin: 0 30px 20px 0;
+}
+
+.transfer-container {
+  width: 250px;
+}
+
+div.transfer-container p {
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+div.target-saving-container p {
+  margin-bottom: 0.2rem;
 }
 
 .error {
   color: red;
+}
+
+input {
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+  padding: 0.3rem;
+  border: 1px solid rgb(157, 156, 156);
+  border-radius: 3px;
+  width: 100%;
+}
+
+button {
+  margin-top: 0.6rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  border: 1px solid rgb(165, 164, 164);
+  border-radius: 3px;
+  font-size: 0.95rem;
+}
+
+div.target-saving-container button,
+div.transfer-container button {
+  margin-top: 0.2;
+}
+
+button:hover {
+  background-color: rgb(248, 246, 238);
+  box-shadow: 2px 2px 4px rgba(178, 177, 164, 0.549);
+}
+
+ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+li:before {
+  content: ' ';
+  margin-right: -7px;
+}
+
+li button {
+  margin-top: 0.4rem;
+  margin-left: 0.4rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+}
+
+progress {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .component-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    /* justify-content: center;
+  align-items: left;
+  text-align: left;
+  padding: 0.5rem;
+  gap: 1.5rem; */
+  }
+  .income-form-container,
+  .expense-form-container,
+  .target-saving-container {
+    margin: 0 0 20px 0;
+  }
+  img {
+    width: 100%;
+  }
 }

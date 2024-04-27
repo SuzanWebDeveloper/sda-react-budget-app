@@ -2,11 +2,14 @@
   text-align: center;
   margin-top: 6rem;
   margin-bottom: 3rem;
-  margin-left: 3rem;
-  margin-right: 3rem;
-  padding: 1.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  padding: 0.5 2rem 0 2rem;
 
 }
+
+
 h1 {
   margin-bottom: 3rem;
+  /* color: rgb(78, 81, 82); */
 }
