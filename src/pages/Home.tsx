@@ -11,7 +11,7 @@ const Home = () => {
         <Button variant="contained">Start</Button>
       </Link>
 
-      <img src="src/img/budget-pic.jpg" alt="budget-image" />
+      <img src="./src/img/budget-pic.jpg" alt="budget-image" />
     </div>
   );
 };
