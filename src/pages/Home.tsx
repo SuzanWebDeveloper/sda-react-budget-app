@@ -7,11 +7,13 @@ const Home = () => {
   return (
     <div>
       <Link to="/budget-app">
- 
         <Button variant="contained">Start</Button>
       </Link>
 
-      <img src="./src/img/budget-pic.jpg" alt="budget-image" />
+      <img
+        src="https://res.cloudinary.com/dzawqz7fy/image/upload/v1714236847/budget-pic_zzwv42.jpg"
+        alt="budget-image"
+      />
     </div>
   );
 };
