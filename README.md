@@ -1,5 +1,7 @@
 Link: https://suz-react-budget-app.netlify.app/
 
+Note: my focus was on coding more than on the UI design.
+
 # React Fundamental
 
 This repository contains a React application to manage incomes, expenses, and saving targets. The application is built using TypeScript and focuses on fundamental concepts.
